@@ -1,4 +1,4 @@
-package com.luisleite.wallet_kmp.domain.model
+package com.luisleite.model
 
 data class Wallet(
     val id: String,

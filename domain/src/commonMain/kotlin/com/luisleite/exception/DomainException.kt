@@ -1,3 +1,3 @@
-package com.luisleite.wallet_kmp.domain.exception
+package com.luisleite.exception
 
 class DomainException(message:String) : Throwable(message)

@@ -1,8 +1,8 @@
-package com.luisleite.wallet_kmp.domain.usecase
+package com.luisleite.usecase
 
-import com.luisleite.wallet_kmp.domain.exception.DomainException
-import com.luisleite.wallet_kmp.domain.model.Wallet
-import com.luisleite.wallet_kmp.domain.repository.WalletRepository
+import com.luisleite.exception.DomainException
+import com.luisleite.model.Wallet
+import com.luisleite.repository.WalletRepository
 
 class CreateWalletUseCase(private val repository: WalletRepository) {
     suspend operator fun invoke(userId: String): Result<Wallet> {

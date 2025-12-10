@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
+    id("app.cash.sqldelight") version "2.0.1"
 }
 
 kotlin {
@@ -10,7 +11,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.luisleite.domain"
+        namespace = "com.luisleite.data"
         compileSdk = 36
         minSdk = 24
 
@@ -31,7 +32,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "domainKit"
+    val xcfName = "dataKit"
 
     iosX64 {
         binaries.framework {
@@ -59,8 +60,17 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
+                implementation(project(":domain"))
                 implementation(libs.kotlin.stdlib)
-                implementation(libs.kotlinx.coroutines.core)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.ktor.client.content.negotiation)
+                implementation(libs.ktor.serialization.kotlinx.json)
+
+                //koin
+                implementation(libs.insert.koin.koin.core)
+                //SQLDELIGHT
+                implementation(libs.runtime)
+                implementation(libs.coroutines.extensions)
             }
         }
 
@@ -75,6 +85,7 @@ kotlin {
                 // Add Android-specific dependencies here. Note that this source set depends on
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
+                implementation(libs.android.driver)
             }
         }
 
@@ -88,13 +99,17 @@ kotlin {
 
         iosMain {
             dependencies {
-                // Add iOS-specific dependencies here. This a source set created by Kotlin Gradle
-                // Plugin (KGP) that each specific iOS target (e.g., iosX64) depends on as
-                // part of KMP’s default source set hierarchy. Note that this source set depends
-                // on common by default and will correctly pull the iOS artifacts of any
-                // KMP dependencies declared in commonMain.
+                implementation(libs.native.driver)
             }
         }
     }
 
+}
+
+sqldelight {
+    databases {
+        create("ArchitectureSampleDatabase") {
+            packageName.set("com.luisleite.data.local")
+        }
+    }
 }

@@ -31,6 +31,8 @@ kotlin {
             implementation(libs.insert.koin.koin.android)
         }
         commonMain.dependencies {
+            implementation(project(":domain"))
+            implementation(project(":data"))
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -39,9 +41,6 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation(libs.ktor.client.core)
-            implementation(libs.ktor.ktor.client.content.negotiation)
-            implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.insert.koin.koin.core)
 
         }

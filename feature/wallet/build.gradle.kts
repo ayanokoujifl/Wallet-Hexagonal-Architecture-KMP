@@ -10,7 +10,7 @@ kotlin {
     // which platforms this KMP module supports.
     // See: https://kotlinlang.org/docs/multiplatform-discover-project.html#targets
     androidLibrary {
-        namespace = "com.luisleite.domain"
+        namespace = "com.luisleite.feature.wallet"
         compileSdk = 36
         minSdk = 24
 
@@ -31,7 +31,7 @@ kotlin {
     // A step-by-step guide on how to include this library in an XCode
     // project can be found here:
     // https://developer.android.com/kotlin/multiplatform/migrate
-    val xcfName = "domainKit"
+    val xcfName = "walletKit"
 
     iosX64 {
         binaries.framework {
@@ -60,7 +60,12 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(libs.kotlin.stdlib)
-                implementation(libs.kotlinx.coroutines.core)
+                // Add KMP dependencies here
+                implementation(project(":domain"))
+                //koin
+                implementation(libs.koin.compose)
+                implementation(libs.koin.compose.viewmodel)
+
             }
         }
 

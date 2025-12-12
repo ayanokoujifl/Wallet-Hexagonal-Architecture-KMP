@@ -33,14 +33,14 @@ kotlin {
         commonMain.dependencies {
             implementation(project(":domain"))
             implementation(project(":data"))
+            implementation(project(":feature:wallet"))
             implementation(compose.runtime)
             implementation(compose.foundation)
-            implementation(compose.material3)
             implementation(compose.ui)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
-            implementation(libs.androidx.lifecycle.viewmodelCompose)
-            implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation(libs.lifecycle.viewmodel.compose)
+            implementation(libs.lifecycle.runtime.compose)
             implementation(libs.insert.koin.koin.core)
 
         }

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidKotlinMultiplatformLibrary)
     alias(libs.plugins.androidLint)
     id("app.cash.sqldelight") version "2.0.1"
+    kotlin("plugin.serialization") version "1.9.10"
 }
 
 kotlin {
@@ -65,7 +66,7 @@ kotlin {
                 implementation(libs.ktor.client.core)
                 implementation(libs.ktor.ktor.client.content.negotiation)
                 implementation(libs.ktor.serialization.kotlinx.json)
-
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
                 //koin
                 implementation(libs.insert.koin.koin.core)
                 //SQLDELIGHT
@@ -86,6 +87,8 @@ kotlin {
                 // commonMain by default and will correctly pull the Android artifacts of any KMP
                 // dependencies declared in commonMain.
                 implementation(libs.android.driver)
+                implementation("io.ktor:ktor-client-okhttp:3.3.3")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
             }
         }
 
@@ -100,6 +103,7 @@ kotlin {
         iosMain {
             dependencies {
                 implementation(libs.native.driver)
+                implementation("io.ktor:ktor-client-darwin:3.3.3")
             }
         }
     }

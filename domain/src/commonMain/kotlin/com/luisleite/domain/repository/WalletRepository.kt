@@ -1,7 +1,8 @@
 package com.luisleite.domain.repository
 
 import com.luisleite.domain.model.Wallet
+import kotlinx.coroutines.flow.Flow
 
 interface WalletRepository {
-    suspend fun createWallet(userId: String): Wallet
+    fun createWallet(userId: String): Flow<Wallet>
 }
